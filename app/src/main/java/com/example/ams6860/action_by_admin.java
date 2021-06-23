@@ -20,11 +20,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class action_by_admin extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = database.getReference();
     ProgressDialog progressDialog;
+    alluserview obj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,30 +42,29 @@ public class action_by_admin extends AppCompatActivity {
         Intent intent = new Intent(getIntent());
         String id = intent.getStringExtra("id");
 
-
         btnaproverequest.setOnClickListener(view -> {
             progressDialog.show();
             databaseReference.child("admin").child("leaves").child(id).get().addOnCompleteListener(task -> {
-             try {
-                 String request=task.getResult().getValue().toString();
-                 if (request.equals("pending")){
-                     AlertDialog.Builder builder=new AlertDialog.Builder(this).
-                             setMessage("user leave request is pending").setPositiveButton("aprove",(dialogInterface, i) -> {
-                   progressDialog.dismiss();
-                         databaseReference.child("admin").child("leaves").child(id).setValue("aproved");
+                try {
+                    String request = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getValue()).toString();
+                    if (request.equals("pending")) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this).
+                                setMessage("user leave request is pending").setPositiveButton("aprove", (dialogInterface, i) -> {
+                            progressDialog.dismiss();
+                            databaseReference.child("admin").child("leaves").child(id).setValue("aproved");
 
-                    }).setNegativeButton("cancel",(dialogInterface, i) -> {
-                         progressDialog.dismiss();
-                     });
-                     builder.show();
-                 }
-                 else {
-                     progressDialog.dismiss();
-                     Toast.makeText(this, "user has no pending leave request", Toast.LENGTH_SHORT).show();
-                 }
-             }catch (Exception e){
-                 Toast.makeText(this, "user has no pending leave request", Toast.LENGTH_SHORT).show();
-             }
+                        }).setNegativeButton("cancel", (dialogInterface, i) -> {
+                            progressDialog.dismiss();
+                        });
+                        builder.show();
+                    } else {
+                        progressDialog.dismiss();
+                        Toast.makeText(this, "user has no pending leave request", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(this, "user has no pending leave request", Toast.LENGTH_SHORT).show();
+                }
 
             });
         });
@@ -105,10 +106,12 @@ public class action_by_admin extends AppCompatActivity {
             builder.setPositiveButton("Present", (dialogInterface, i) -> {
                 progressDialog.show();
                 databaseReference.child("users").child(id).child("Attendance").child(currentDate).setValue("present");
+
                 progressDialog.dismiss();
             }).setNegativeButton("absent", (dialogInterface, i) -> {
                 progressDialog.show();
                 databaseReference.child("users").child(id).child("Attendance").child(currentDate).setValue("absent");
+
                 progressDialog.dismiss();
             });
             builder.show();

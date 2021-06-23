@@ -34,6 +34,7 @@ public class alluserview extends AppCompatActivity {
     List<String> listattendance = new ArrayList<>();
     ProgressDialog pd;
     adapterclass obj;
+    RecyclerView recyclerView;
 
     @Override
 
@@ -51,11 +52,15 @@ public class alluserview extends AppCompatActivity {
     public void loadactivity() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String currentDate = sdf.format(new Date());
-        FirebaseDatabase db=FirebaseDatabase.getInstance();
-        DatabaseReference ref=db.getReference();
-        ref.child("users").addValueEventListener(new ValueEventListener() {
+//        FirebaseDatabase db=FirebaseDatabase.getInstance();
+//        DatabaseReference ref=db.getReference();
+        reference.child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                listid.clear();
+                listname.clear();
+                listattendance.clear();
                 for (DataSnapshot ds : snapshot.getChildren()) {
 
                     String key = ds.getKey();
@@ -67,16 +72,12 @@ public class alluserview extends AppCompatActivity {
                         listattendance.add(attendance);
                     } catch (Exception e) {
                         listattendance.add("absent");
-//                        Toast.makeText(alluserview.this, "u", Toast.LENGTH_SHORT).show();
-//                        e.printStackTrace();
                     }
-//                    finally {
-//                        listattendance.add("absent");
-//
-//                    }
                 }
+
+
                 obj = new adapterclass(alluserview.this, listname, listid, listattendance);
-                RecyclerView recyclerView = findViewById(R.id.recycler);
+                 recyclerView = findViewById(R.id.recycler);
                 recyclerView.setAdapter(obj);
                 recyclerView.setLayoutManager(new LinearLayoutManager(alluserview.this));
                 pd.dismiss();

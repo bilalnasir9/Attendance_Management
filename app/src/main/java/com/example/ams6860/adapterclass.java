@@ -46,7 +46,7 @@ alluserview objalluser;
             Intent intent=new Intent(context,action_by_admin.class);
             intent.putExtra("id",listid.get(position));
             context.startActivity(intent);
-            objalluser.finish();
+
         });
     }
 
