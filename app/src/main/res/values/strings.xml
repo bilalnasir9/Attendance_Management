@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Attendance Management System</string>
+    <string name="title_activity_navigation_drawer">navigation_drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="developed_by_bilal_nasir">Developed by: Bilal Nasir</string>
+    <string name="attendance_management_system">Attendance Management System</string>
+    <string name="admin_panel">admin panel</string>
+    <string name="name">Name</string>
+    <string name="id">ID</string>
+    <string name="password">Password</string>
+    <string name="register"> Register </string>
+    <string name="registration">Registration</string>
+    <string name="new_user_go_to">New user? go to</string>
+    <string name="admin_login">Admin login</string>
+    <string name="user_panel">user panel</string>
+    <string name="mark_attendance">Mark attendance</string>
+    <string name="view_all_attendance">Attendance history</string>
+    <string name="send_leave_request">Send leave request</string>
+    <string name="log_out">log out</string>
+    <string name="leave_request">Leave request</string>
+</resources>
